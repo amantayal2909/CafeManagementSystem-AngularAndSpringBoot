@@ -8,7 +8,6 @@ import com.misoft.cafe.entity.User;
 import com.misoft.cafe.repository.UserRepository;
 import com.misoft.cafe.service.UserService;
 import com.misoft.cafe.utils.CafeUtils;
-import com.misoft.cafe.utils.EmailUtils;
 import com.misoft.cafe.wrapper.UserWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +38,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     JwtFilter jwtFilter;
-
-    @Autowired
-    EmailUtils emailUtils;
 
     @Override
     public ResponseEntity<String> signUp(Map<String, String> requestMap) {
@@ -127,11 +123,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<String> update(Map<String, String> requestMap) {
         try {
-            if(jwtFilter.isAdmin()) {
+            if(jwtFilter.isUser()) {
                 Optional<User> optional = userRepository.findById(Integer.parseInt(requestMap.get("id")));
                 if(optional.isPresent()) {
                     userRepository.updateStatus(requestMap.get("status"), Integer.parseInt(requestMap.get("id")));
-                    sendMailToAllAdmin(requestMap.get("status"), optional.get().getEmail(), userRepository.getAllAdmin());
                     return CafeUtils.getResponseEntity("User status updated successfully", HttpStatus.OK);
                 } else {
                     CafeUtils.getResponseEntity("User id does not exist", HttpStatus.OK);
@@ -143,15 +138,6 @@ public class UserServiceImpl implements UserService {
             ex.printStackTrace();
         }
         return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    private void sendMailToAllAdmin(String status, String user, List<String> allAdmin) {
-        allAdmin.remove(jwtFilter.getCurrentUser());
-        if(status != null && status.equalsIgnoreCase("true")) {
-            emailUtils.sendSimpleMessage(jwtFilter.getCurrentUser(), "Account Approved", "USER:- " + user + " \n is approved by \nADMIN:-" + jwtFilter.getCurrentUser(), allAdmin);
-        } else {
-            emailUtils.sendSimpleMessage(jwtFilter.getCurrentUser(), "Account Disabled", "USER:- " + user + " \n is disabled by \nADMIN:-" + jwtFilter.getCurrentUser(), allAdmin);
-        }
     }
 
 }
