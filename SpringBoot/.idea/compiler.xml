@@ -8,18 +8,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="CafeManagementSystem" />
-        <module name="com.misoft.cafe" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="CafeManagementSystem" target="1.8" />
-      <module name="com.misoft.cafe" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="CafeManagementSystem" options="-parameters" />
-      <module name="com.misoft.cafe" options="-parameters" />
     </option>
   </component>
 </project>

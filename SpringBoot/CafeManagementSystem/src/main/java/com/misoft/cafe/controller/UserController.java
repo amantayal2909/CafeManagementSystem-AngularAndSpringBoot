@@ -14,15 +14,12 @@ import java.util.Map;
 public interface UserController {
 
     @PostMapping(path = "/signup")
-    public ResponseEntity<String> signUp(@RequestBody(required = true) Map<String, String> requestMap);
+    public ResponseEntity<String> signUp(@RequestBody Map<String, String> requestMap);
 
     @PostMapping(path = "/login")
-    public ResponseEntity<String> login(@RequestBody(required = true) Map<String, String> requestMap);
+    public ResponseEntity<String> login(@RequestBody Map<String, String> requestMap);
 
     @GetMapping(path = "/get")
     public ResponseEntity<List<UserWrapper>> getAllUser();
-
-    @PostMapping(path = "/update")
-    public ResponseEntity<String> update(@RequestBody(required = true) Map<String, String> requestMap);
 
 }
