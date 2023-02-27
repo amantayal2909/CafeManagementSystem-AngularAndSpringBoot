@@ -13,6 +13,8 @@ import java.io.Serializable;
 
 @NamedQuery(name = "User.updateStatus", query = "UPDATE User u SET u.status=:status WHERE u.id=:id")
 
+@NamedQuery(name = "User.getAllAdmin", query = "SELECT u.email FROM User u WHERE u.role = 'admin'")
+
 @Data
 @Entity
 @DynamicUpdate
