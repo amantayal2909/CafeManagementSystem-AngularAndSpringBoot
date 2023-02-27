@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/com.misoft.cafe/CafeManagementSystem.iml" filepath="$PROJECT_DIR$/com.misoft.cafe/CafeManagementSystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/SpringBoot.iml" filepath="$PROJECT_DIR$/.idea/SpringBoot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CafeManagementSystem/com.misoft.cafe.iml" filepath="$PROJECT_DIR$/CafeManagementSystem/com.misoft.cafe.iml" />
     </modules>
   </component>
 </project>
