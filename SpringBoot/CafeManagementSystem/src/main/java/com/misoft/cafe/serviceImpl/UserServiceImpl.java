@@ -10,6 +10,7 @@ import com.misoft.cafe.service.UserService;
 import com.misoft.cafe.utils.CafeUtils;
 import com.misoft.cafe.utils.EmailUtils;
 import com.misoft.cafe.wrapper.UserWrapper;
+import io.jsonwebtoken.lang.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -174,6 +175,20 @@ public class UserServiceImpl implements UserService {
                 return CafeUtils.getResponseEntity("Incorrect Old Password", HttpStatus.BAD_REQUEST);
             }
             return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<String> forgotPassword(Map<String, String> requestMap) {
+        try {
+            User user = userRepository.findByEmail(requestMap.get("email"));
+            if(user != null && !user.getEmail().isEmpty())
+                emailUtils.forgotMail(user.getEmail(), "Credentials by Cafe Management System", user.getPassword());
+            return CafeUtils.getResponseEntity("Check your mail for credentials.", HttpStatus.OK);
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
