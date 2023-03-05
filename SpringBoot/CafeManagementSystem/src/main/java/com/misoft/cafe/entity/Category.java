@@ -7,7 +7,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@NamedQuery(name = "Category.getAllCategory", query = "SELECT c FROM Category c")
+@NamedQuery(name = "Category.getAllCategory", query = "SELECT c FROM Category c WHERE c.id in (SELECT p.category from Product p WHERE p.status='true')")
 
 @Data
 @Entity
