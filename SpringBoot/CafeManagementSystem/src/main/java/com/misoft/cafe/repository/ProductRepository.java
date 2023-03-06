@@ -3,9 +3,16 @@ package com.misoft.cafe.repository;
 import com.misoft.cafe.entity.Product;
 import com.misoft.cafe.wrapper.ProductWrapper;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.repository.query.Param;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<ProductWrapper> getAllProduct();
+
+    @Modifying
+    @Transactional
+    Integer updateProductStatus(@Param("status") String status, @Param("id") Integer id);
 }
