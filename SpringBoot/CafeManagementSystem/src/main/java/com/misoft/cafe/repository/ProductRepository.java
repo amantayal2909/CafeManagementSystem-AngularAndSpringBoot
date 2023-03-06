@@ -15,4 +15,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Modifying
     @Transactional
     Integer updateProductStatus(@Param("status") String status, @Param("id") Integer id);
+
+    List<ProductWrapper> getProductByCategory(@Param("id") Integer id);
 }
