@@ -13,6 +13,8 @@ import java.io.Serializable;
 
 @NamedQuery(name = "Product.getProductByCategory", query = "SELECT new com.misoft.cafe.wrapper.ProductWrapper(p.id, p.name) FROM Product p WHERE p.category.id=:id and p.status='true'")
 
+@NamedQuery(name = "Product.getProductById", query = "SELECT new com.misoft.cafe.wrapper.ProductWrapper(p.id, p.name, p.description, p.price) FROM Product p WHERE p.id=:id")
+
 @Data
 @Entity
 @DynamicUpdate
