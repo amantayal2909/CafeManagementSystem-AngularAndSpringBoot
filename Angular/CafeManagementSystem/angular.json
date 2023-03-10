@@ -125,6 +125,9 @@
     },
     "@schematics/angular:pipe": {
       "skipTests": true
+    },
+    "@schematics/angular:interceptor": {
+      "skipTests": true
     }
   },
   "cli": {
