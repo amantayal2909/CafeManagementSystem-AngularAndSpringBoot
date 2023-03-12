@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
       // this.snackbarService.openSnackBar(this.responseMessage, "");
       this.router.navigate(['/cafe/dashboard']);
     }, (error) => {
-      // this.ngxService.stop();
+      this.ngxService.stop();
       if(error.error?.message) {
         this.responseMessage = error.error?.message;
       } else {
