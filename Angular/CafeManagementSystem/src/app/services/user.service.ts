@@ -12,39 +12,39 @@ export class UserService {
   constructor(private httpClient:HttpClient) { }
 
   signup(data:any) {
-    return this.httpClient.post(this.url + "/user/signup/", data, {
+    return this.httpClient.post(this.url + "/user/signup", data, {
       headers:new HttpHeaders().set('Content-type', 'application/json')
     })
   }
 
   forgotPassword(data:any) {
-    return this.httpClient.post(this.url + "/user/forgotPassword/", data, {
+    return this.httpClient.post(this.url + "/user/forgotPassword", data, {
       headers:new HttpHeaders().set('Content-type', 'application/json')
     })
   }
 
   login(data:any) {
-    return this.httpClient.post(this.url + "/user/login/", data, {
+    return this.httpClient.post(this.url + "/user/login", data, {
       headers:new HttpHeaders().set('Content-type', 'application/json')
     })
   }
 
   checkToken() {
-    return this.httpClient.get(this.url + "/user/checkToken/");
+    return this.httpClient.get(this.url + "/user/checkToken");
   }
 
   changePassword(data:any) {
-    return this.httpClient.post(this.url + "/user/changePassword/", data, {
+    return this.httpClient.post(this.url + "/user/changePassword", data, {
       headers:new HttpHeaders().set('Content-type', 'application/json')
     })
   }
 
   getUsers() {
-    return this.httpClient.get(this.url + "/user/get/");
+    return this.httpClient.get(this.url + "/user/get");
   }
 
   update(data: any) {
-    return this.httpClient.post(this.url + "/user/update/", data, {
+    return this.httpClient.post(this.url + "/user/update", data, {
       headers: new HttpHeaders().set('Content-Type', "application/json")
     });
   }

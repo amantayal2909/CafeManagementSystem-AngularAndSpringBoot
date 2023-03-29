@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
         user.setName(requestMap.get("name"));
         user.setContactNumber(requestMap.get("contactNumber"));
         user.setEmail(requestMap.get("email"));
-        user.setPassword(requestMap.get("password"));
+            user.setPassword(requestMap.get("password"));
         user.setStatus("false");
         user.setRole("user");
         return user;
