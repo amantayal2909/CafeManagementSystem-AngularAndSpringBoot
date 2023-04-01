@@ -47,6 +47,11 @@ export class LoginComponent implements OnInit {
       console.log(data);
       this.ngxService.stop();
       this.dialogRef.close();
+      console.log("----------Login-----------");
+
+      console.log(response.token,"---------------");
+      window.sessionStorage.removeItem('token');
+      window.sessionStorage.setItem('token', JSON.stringify(response.token));
       localStorage.setItem('token', response.token);
       // this.responseMessage = response?.message;
       // this.snackbarService.openSnackBar(this.responseMessage, "");

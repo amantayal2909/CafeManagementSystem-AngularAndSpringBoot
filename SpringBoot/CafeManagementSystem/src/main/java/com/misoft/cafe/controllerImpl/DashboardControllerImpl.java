@@ -16,6 +16,7 @@ public class DashboardControllerImpl implements DashboardController {
 
     @Override
     public ResponseEntity<Map<String, Object>> getCount() {
+
         return dashboardService.getCount();
     }
 }
