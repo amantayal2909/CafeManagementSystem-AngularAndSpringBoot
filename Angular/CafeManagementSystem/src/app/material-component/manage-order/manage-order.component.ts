@@ -19,7 +19,8 @@ export class ManageOrderComponent implements OnInit {
 
   dataSource: any = [];
 
-  manageOrderForm: any = FormGroup;
+  // manageOrderForm:  FormGroup;
+  manageOrderForm:any= FormGroup ; 
 
   categories: any = [];
 
@@ -42,7 +43,7 @@ export class ManageOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.ngxService.start();
-    this.getCategories();
+    // this.getCategories();
     this.manageOrderForm = this.formBuilder.group({
       name: [null, [Validators.required, Validators.pattern(GlobalConstants.nameRegex)]],
       email: [null, [Validators.required, Validators.pattern(GlobalConstants.emailRegex)]],
@@ -54,12 +55,15 @@ export class ManageOrderComponent implements OnInit {
       price: [null, [Validators.required]],
       total: [0, [Validators.required]],
     })
+    this.getCategories();
   }
 
   getCategories() {
     this.categoryService.getFilteredCategories().subscribe((response: any) => {
+      // console.log(response, "New");
       this.ngxService.stop();
       this.categories = response;
+      console.log(this.categories,"this one ");
     }, (error: any) => {
       this.ngxService.stop();
       console.log(error);
@@ -73,8 +77,10 @@ export class ManageOrderComponent implements OnInit {
   }
 
   getProductsByCategory(value: any) {
-    this.productService.getProductsByCategory(value.id).subscribe((response: any) => {
+    // console.log(value, "Category Value")
+    this.productService.getProductsByCategory(value.target.value).subscribe((response: any) => {
       this.products = response;
+      // console.log(this.products)
       this.manageOrderForm.controls['price'].setValue('');
       this.manageOrderForm.controls['quantity'].setValue('');
       this.manageOrderForm.controls['total'].setValue(0);
@@ -88,13 +94,16 @@ export class ManageOrderComponent implements OnInit {
       this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
     })
   }
+  
 
   getProductDetails(value: any) {
-    this.productService.getById(value.id).subscribe((response: any) => {
+    if(value.target.value == -1) return;
+    this.productService.getById(value.target.value).subscribe((response: any) => {
       this.price = response.price;
       this.manageOrderForm.controls['price'].setValue(response.price);
       this.manageOrderForm.controls['quantity'].setValue('1');
       this.manageOrderForm.controls['total'].setValue(this.price * 1);
+      console.log(response);
     }, (error: any) => {
       console.log(error);
       if (error.error?.message) {
@@ -105,7 +114,7 @@ export class ManageOrderComponent implements OnInit {
       this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
     })
   }
-
+  
   setQuantity(value: any) {
     var temp = this.manageOrderForm.controls['quantity'].value;
     if (temp > 0) {
@@ -156,30 +165,30 @@ export class ManageOrderComponent implements OnInit {
   }
 
   submitAction() {
-    var formData = this.manageOrderForm.value;
-    var data = {
-      name: formData.name,
-      email: formData.email,
-      contactNumber: formData.contactNumber,
-      paymentMethod: formData.paymentMethod,
-      totalAmount: this.totalAmount.toString(),
-      productDetails: JSON.stringify(this.dataSource)
-    }
-    this.ngxService.start();
-    this.billService.generateReport(data).subscribe((response: any) => {
-      this.downloadFile(response?.uuid);
-      this.manageOrderForm.reset();
-      this.dataSource = [];
-      this.totalAmount = 0;
-    }, (error: any) => {
-      console.log(error);
-      if (error.error?.message) {
-        this.responseMessage = error.error?.message;
-      } else {
-        this.responseMessage = GlobalConstants.genericError;
-      }
-      this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
-    })
+    // var formData = this.manageOrderForm.value;
+    // var data = {
+    //   name: formData.name,
+    //   email: formData.email,
+    //   contactNumber: formData.contactNumber,
+    //   paymentMethod: formData.paymentMethod,
+    //   totalAmount: this.totalAmount.toString(),
+    //   productDetails: JSON.stringify(this.dataSource)
+    // }
+    // this.ngxService.start();
+    // this.billService.generateReport(data).subscribe((response: any) => {
+    //   this.downloadFile(response?.uuid);
+    //   this.manageOrderForm.reset();
+    //   this.dataSource = [];
+    //   this.totalAmount = 0;
+    // }, (error: any) => {
+    //   console.log(error);
+    //   if (error.error?.message) {
+    //     this.responseMessage = error.error?.message;
+    //   } else {
+    //     this.responseMessage = GlobalConstants.genericError;
+    //   }
+    //   this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
+    // })
   }
 
   downloadFile(fileName: string) {

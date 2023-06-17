@@ -13,3 +13,59 @@ table{
 mat-card{
     padding-bottom: 30px !important;
 }
+
+// .customer-details {
+//     /* Add your custom styles for the customer details container */
+//    // display: flex;
+    
+//   }
+  
+  .title {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+//   .form-row {
+//     display: flex;
+//   }
+  
+  .form-group {
+   // flex: 0 0 auto;
+    width: 50%;
+    margin-right: 60px;
+    margin-bottom: 20px;
+    margin-left: 40px;
+    margin-top: 20px;
+  }
+.row1{
+    display: flex;
+}
+  
+  label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  input{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  select{
+    width: 103%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  
+  }
+  .error-message {
+    color: red;
+    margin-top: 5px;
+    font-size: 12px;
+  }
+//   .error-message {
+//     color: red;
+//     margin-top: 5px;
+//     font-size: 12px;
+//   }

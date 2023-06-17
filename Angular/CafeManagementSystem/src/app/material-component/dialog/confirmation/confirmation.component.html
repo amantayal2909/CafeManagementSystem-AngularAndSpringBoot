@@ -1,6 +1,7 @@
-<mat-toolbar color="primary">
+<div class="box">
+<mat-toolbar style="background-color: #B799FF ;">
     <mat-toolbar-row fxLayout="row">
-        <span>Confirmation</span>
+        <span style="margin-left: 3.5%;">Confirmation</span>
         <span class="spacer"></span>
         <button class="mat-dialog-close" mat-icon-button mat-dialog-close>
             <mat-icon>close</mat-icon>
@@ -13,7 +14,7 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-    <button mat-raised-button color="primary" (click)="handleChangeAction()">
+    <button mat-raised-button style="background-color: #B799FF ;" (click)="handleChangeAction()">
         <mat-icon>check_circle</mat-icon> Yes
     </button>
 
@@ -21,3 +22,4 @@
         <mat-icon>cancel</mat-icon> No
     </button>
 </mat-dialog-actions>
+</div>

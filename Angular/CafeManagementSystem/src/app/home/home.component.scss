@@ -24,7 +24,7 @@ body {
 
 /* Style the navigation bar links */
 .navbar a {
-  color: white;
+  color: black;
   padding: 14px 20px;
   text-decoration: none;
   text-align: center;
@@ -32,7 +32,7 @@ body {
 
 /* Change color on hover */
 .navbar a:hover {
-  background-color: #ddd;
+  background-color: black;
   color: black;
 }
 
@@ -68,8 +68,12 @@ body {
 .footer {
   padding: 6px;
   text-align: center;
-  color: white;
-  background: #7b1fa2;
+  color: black;
+  background: #B799FF;
+}
+.foot{
+  //margin-top: auto;
+  margin-bottom: auto;
 }
 
 /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
@@ -111,7 +115,8 @@ body {
   display: flex;
   align-items: center;
   justify-content:center;
-  background-color: #7b1fa2;
+  background-color: #B799FF;
+  //color: Black;
 }
 
 nav {
@@ -136,7 +141,7 @@ ul {
 
 a {
   text-decoration: none;
-  color: #ffffff;
+  color: black;
   position: relative;
   font-size: 1.25em;
   cursor: pointer;
@@ -200,11 +205,11 @@ a {
 }
 .bg-image {
   /* The image used */
-  background-image: url("../../assets/img/food1.jpg");
+  background-image: url("https://images.unsplash.com/photo-1542904990-6ada3c5b39c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2FmZSUyMGZvb2R8ZW58MHwwfDB8fHww&auto=format&fit=crop&w=500&q=60");
   
   /* Add the blur effect */
-  filter: blur(3px);
-  -webkit-filter: blur(3px);
+  filter: blur(0.5px);
+  -webkit-filter: blur(0.5px);
   
   /* Full height */
   height: 50%; 

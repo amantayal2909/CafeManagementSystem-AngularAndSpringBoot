@@ -26,6 +26,7 @@ export class AppHeaderComponent {
     const sub = dialogRef.componentInstance.onEmitStatusChange.subscribe((response) => {
       dialogRef.close();
       localStorage.clear();
+      //sessionStorage.clear();
       this.router.navigate(['/']);
     })
   }

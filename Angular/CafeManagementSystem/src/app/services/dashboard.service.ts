@@ -13,8 +13,12 @@ export class DashboardService {
 
   getDetails() {
     const user = window.sessionStorage.getItem('token');
+    console.log("get details" ,user);
+    
     if (user) {
       const userToken = JSON.parse(user);
+      console.log("inside if", userToken);
+      
       return this.httpClient.get(this.url + "/dashboard/details", {
         headers: new HttpHeaders()
           .set('Content-type', 'application/json')

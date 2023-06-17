@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
         user.setName(requestMap.get("name"));
         user.setContactNumber(requestMap.get("contactNumber"));
         user.setEmail(requestMap.get("email"));
-            user.setPassword(requestMap.get("password"));
+        user.setPassword(requestMap.get("password"));
         user.setStatus("false");
         user.setRole("user");
         return user;
@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<String> login(Map<String, String> requestMap) {
-        log.info("Inside login");
+        log.info("Inside login 124");
         try {
             Authentication auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(requestMap.get("email"), requestMap.get("password"))
@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
                     return new ResponseEntity<String>("{\"token\":\""+
                             jwtUtil.generateToken(customerUsersDetailsService.getUserDetail().getEmail(),
                                     customerUsersDetailsService.getUserDetail().getRole()) + "\"}",
-                    HttpStatus.OK);
+                            HttpStatus.OK);
                 } else {
                     return new ResponseEntity<String>("{\"message\":\""+"Wait for admin approval."+"\"}",
                             HttpStatus.BAD_REQUEST);
@@ -132,7 +132,7 @@ public class UserServiceImpl implements UserService {
                 Optional<User> optional = userRepository.findById(Integer.parseInt(requestMap.get("id")));
                 if(optional.isPresent()) {
                     userRepository.updateStatus(requestMap.get("status"), Integer.parseInt(requestMap.get("id")));
-                    sendMailToAllAdmin(requestMap.get("status"), optional.get().getEmail(), userRepository.getAllAdmin());
+                    //sendMailToAllAdmin(requestMap.get("status"), optional.get().getEmail(), userRepository.getAllAdmin());
                     return CafeUtils.getResponseEntity("User status updated successfully", HttpStatus.OK);
                 } else {
                     CafeUtils.getResponseEntity("User id does not exist", HttpStatus.OK);
@@ -164,9 +164,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<String> changePassword(Map<String, String> requestMap) {
+
         try {
             User userObj = userRepository.findByEmail(jwtFilter.getCurrentUser());
-            if(userObj.equals(null)) {
+            if(!userObj.equals(null)) {
+//                log.info("oldPassword" + requestMap.get("oldPassword"));
                 if(userObj.getPassword().equals(requestMap.get("oldPassword"))) {
                     userObj.setPassword(requestMap.get("newPassword"));
                     userRepository.save(userObj);

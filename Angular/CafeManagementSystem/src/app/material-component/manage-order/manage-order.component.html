@@ -1,126 +1,143 @@
-<mat-card>
-    <b><span>Manage Order</span></b>
-    <button mat-flat-button color="primary" class="float-right" [disabled]="validateSubmit()" (click)="submitAction()">
+<mat-card style="margin-left: 2%; margin-right: 2%;">
+    <!-- <b><span>Manage </span></b> -->
+    <h3><b><span style="margin-top: 2px;margin-bottom: 50%; margin-left: 0%; ">Manage Order</span></b></h3>
+    <button mat-flat-button style="background-color: #B799FF ; color:black;"class="float-right" [disabled]="validateSubmit()" (click)="submitAction()">
         <mat-icon>print</mat-icon> Submit & Get Bill
     </button>
 </mat-card>
 
 <hr>
 
-<mat-card>
-    <b><span>Customer Details:</span></b>
+<div class="customer-details">
+
+    <div class="title" style="margin-left: 2.5%;"><b>Customer Details:</b></div>
+
     <form [formGroup]="manageOrderForm">
-        <div fxFlex="" fxLayout="column">
-            <div fxLayout="row wrap">
-                <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Name</mat-label>
-                    <input matInput formControlName="name" required>
-                    <mat-error *ngIf="manageOrderForm.controls.name.touched && manageOrderForm.controls.name.invalid">
-                        <span *ngIf="manageOrderForm.controls.name.errors.required">This field is mandatory</span>
-                        <span *ngIf="manageOrderForm.controls.name.errors.pattern">This field is invalid</span>
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Email</mat-label>
-                    <input matInput formControlName="email" required>
-                    <mat-error *ngIf="manageOrderForm.controls.email.touched && manageOrderForm.controls.email.invalid">
-                        <span *ngIf="manageOrderForm.controls.email.errors.required">This field is mandatory</span>
-                        <span *ngIf="manageOrderForm.controls.email.errors.pattern">This field is invalid</span>
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Contact Number</mat-label>
-                    <input matInput formControlName="contactNumber" required>
-                    <mat-error *ngIf="manageOrderForm.controls.contactNumber.touched && manageOrderForm.controls.contactNumber.invalid">
-                        <span *ngIf="manageOrderForm.controls.contactNumber.errors.required">This field is mandatory</span>
-                        <span *ngIf="manageOrderForm.controls.contactNumber.errors.pattern">This field is invalid</span>
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" fxFlex>
-                    <mat-label>Payment Method</mat-label>
-                    <mat-select formControlName="paymentMethod" required>
-                        <mat-option value="Cash">Cash</mat-option>
-                        <mat-option value="Credit Card">Credit Card</mat-option>
-                        <mat-option value="Debit Card">Debit Card</mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="manageOrderForm.controls.paymentMethod.touched && manageOrderForm.controls.paymentMethod.invalid">
-                        <span *ngIf="manageOrderForm.controls.paymentMethod.errors.required">This field is mandatory</span>
-                        <span *ngIf="manageOrderForm.controls.paymentMethod.errors.pattern">This field is invalid</span>
-                    </mat-error>
-                </mat-form-field>
-            </div>
+      <div class="row1">  
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" formControlName="name" required>
+        <div class="error-message" *ngIf="manageOrderForm.controls.name.touched && manageOrderForm.controls.name.invalid">
+          <span *ngIf="manageOrderForm.controls.name.errors.required">This field is mandatory</span>
+          <span *ngIf="manageOrderForm.controls.name.errors.pattern">This field is invalid</span>
         </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" required>
+        <div class="error-message" *ngIf="manageOrderForm.controls.email.touched && manageOrderForm.controls.email.invalid">
+          <span *ngIf="manageOrderForm.controls.email.errors.required">This field is mandatory</span>
+          <span *ngIf="manageOrderForm.controls.email.errors.pattern">This field is invalid</span>
+        </div>
+      </div>
+      </div>
+      <div class="row1">
+      <div class="form-group">
+        <label for="contactNumber">Contact Number</label>
+        <input type="text" id="contactNumber" formControlName="contactNumber" required>
+        <div class="error-message" *ngIf="manageOrderForm.controls.contactNumber.touched && manageOrderForm.controls.contactNumber.invalid">
+          <span *ngIf="manageOrderForm.controls.contactNumber.errors.required">This field is mandatory</span>
+          <span *ngIf="manageOrderForm.controls.contactNumber.errors.pattern">This field is invalid</span>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="paymentMethod">Payment Method</label>
+        <select id="paymentMethod" formControlName="paymentMethod" required>
+          <option value="Cash">Cash</option>
+          <option value="Credit Card">Credit Card</option>
+          <option value="Debit Card">Debit Card</option>
+        </select>
+        <div class="error-message" *ngIf="manageOrderForm.controls.paymentMethod.touched && manageOrderForm.controls.paymentMethod.invalid">
+          <span *ngIf="manageOrderForm.controls.paymentMethod.errors.required">This field is mandatory</span>
+          <span *ngIf="manageOrderForm.controls.paymentMethod.errors.pattern">This field is invalid</span>
+        </div>
+      </div>
+      </div>
     </form>
-</mat-card>
+  </div>
+  
 
 <hr>
 
-<mat-card>
+<div class="card">
+    <b><span style="margin-left: 2.5%;">Select Product:</span></b>
+    <form [formGroup]="manageOrderForm">
+      <div class="form-container">
+        <div class="form-row">
 
-<b><span>Select Product:</span></b>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <h1 id="category-sample" style="display: none;">{{categories[0].name}}</h1>
+            
+           <!-- <div class="sample" *ngFor="let category of categories">
+            <h1>{{category.name}}</h1>
 
-<form [formGroup]="manageOrderForm">
-    <div fxFlex fxLayout="column">
-        <div fxLayout="row wrap">
-            <mat-form-field appearance="outline" fxFlex>
-                <mat-label>Category</mat-label>
-                <mat-select formControlName="category" (selectionChange)="getProductsByCategory($event.value)">
-                    <mat-option *ngFor="let category of categories" [value]="category">
-                        {{ category.name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+           </div> -->
+            <!-- (change)="getProductsByCategory('$event.value')" -->
+            <select id="category" formControlName="category" (change)="getProductsByCategory($event)">
+              <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+            </select>
 
-            <mat-form-field appearance="outline" fxFlex>
-                <mat-label>Product</mat-label>
-                <mat-select formControlName="product" (selectionChange)="getProductDetails($event.value)">
-                    <mat-option *ngFor="let product of products" [value]="product">
-                        {{ product.name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+           <!-- <mat-select formControlName="categoryId">
+                <mat-option *ngFor="let category of categories" [value]="category.id">
+                    {{ category.name }}
+                </mat-option>
+            </mat-select> -->
 
-            <mat-form-field appearance="outline" fxFlex>
-                <mat-label>Price</mat-label>
-                <input matInput formControlName="price" required readonly>
-                <mat-error *ngIf="manageOrderForm.controls.price.touched && manageOrderForm.controls.price.invalid">
-                    <span *ngIf="manageOrderForm.controls.price.errors.required">This field is mandatory</span>
-                    <span *ngIf="manageOrderForm.controls.price.errors.pattern">This field is invalid</span>
-                </mat-error>
-            </mat-form-field>
+            <!-- <h1>Hello world</h1> -->
+            <!-- <select name="category" id="">
+                <option value=""></option>
+                <option *ngFor="let category in categories" [value]="category.id" >{{category.name}}</option>
+            </select> -->
+          </div>
 
-            <mat-form-field appearance="outline" fxFlex>
-                <mat-label>Quantity</mat-label>
-                <input matInput formControlName="quantity" required (keyup)="setQuantity($event)" #input>
-                <mat-error *ngIf="manageOrderForm.controls.quantity.touched && manageOrderForm.controls.quantity.invalid">
-                    <span *ngIf="manageOrderForm.controls.quantity.errors.required">This field is mandatory</span>
-                    <span *ngIf="manageOrderForm.controls.quantity.errors.pattern">This field is invalid</span>
-                </mat-error>
-            </mat-form-field>
+          <div class="form-group">
+              <label for="product">Product</label>
+            <h1 *ngIf="products?.length > 0" id="product-sample" style="display: none;">{{products?.[0].name}}</h1>
 
-            <mat-form-field appearance="outline" fxFlex>
-                <mat-label>Total</mat-label>
-                <input matInput formControlName="total" required readonly>
-                <mat-error *ngIf="manageOrderForm.controls.total.touched && manageOrderForm.controls.total.invalid">
-                    <span *ngIf="manageOrderForm.controls.total.errors.required">This field is mandatory</span>
-                    <span *ngIf="manageOrderForm.controls.total.errors.pattern">This field is invalid</span>
-                </mat-error>
-            </mat-form-field>
+            <select *ngIf="products?.length >= 0" id="product" formControlName="product" (change)="getProductDetails($event)">
+                <option [defaultSelected]="true" value="-1">Select Product</option>
+              <option *ngFor="let product of products" [value]="product.id">{{ product.name }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input id="price" type="text" formControlName="price" required [readonly]="true">
+            <div class="error-message" *ngIf="manageOrderForm.controls.price.touched && manageOrderForm.controls.price.invalid">
+              <span *ngIf="manageOrderForm.controls.price.errors.required">This field is mandatory</span>
+              <span *ngIf="manageOrderForm.controls.price.errors.pattern">This field is invalid</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input id="quantity" type="text" formControlName="quantity" required (keyup)="setQuantity('$event.value')" #input>
+            <div class="error-message" *ngIf="manageOrderForm.controls.quantity.touched && manageOrderForm.controls.quantity.invalid">
+              <span *ngIf="manageOrderForm.controls.quantity.errors.required">This field is mandatory</span>
+              <span *ngIf="manageOrderForm.controls.quantity.errors.pattern">This field is invalid</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="total">Total</label>
+            <input id="total" type="text" formControlName="total" required [readonly]="true">
+            <div class="error-message" *ngIf="manageOrderForm.controls.total.touched && manageOrderForm.controls.total.invalid">
+              <span *ngIf="manageOrderForm.controls.total.errors.required">This field is mandatory</span>
+              <span *ngIf="manageOrderForm.controls.total.errors.pattern">This field is invalid</span>
+            </div>
+          </div>
         </div>
+      </div>
+    </form>
+  
+    <div class="buttons-container">
+      <button class="btn-primary" [disabled]="validateProductAdd()" (click)="add()">Add</button>
+      <button class="btn-primary float-right">
+        <i class="icon-monetization_on"></i> Total Amount: {{ totalAmount }}
+      </button>
     </div>
-</form>
-
-<div>
-    <button mat-flat-button color="primary" [disabled]="validateProductAdd()" (click)="add()">Add</button>
-    <button mat-flat-button color="primary" class="float-right">
-        <mat-icon>monetization_on</mat-icon> Total Amount: {{ totalAmount }}
-    </button>
-</div>
-
-</mat-card>
+  </div>
+  
 
 <hr>
 

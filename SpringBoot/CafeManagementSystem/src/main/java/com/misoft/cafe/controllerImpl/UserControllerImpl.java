@@ -72,9 +72,12 @@ public class UserControllerImpl implements UserController {
 
     @Override
     public ResponseEntity<String> changePassword(Map<String, String> requestMap) {
+
         try {
+
             return userService.changePassword(requestMap);
         } catch (Exception ex) {
+//            System.out.println("Inside the change password user controller");
             ex.printStackTrace();
         }
         return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);

@@ -19,15 +19,18 @@ import { NgxUiLoaderConfig, NgxUiLoaderModule, SPINNER } from 'ngx-ui-loader';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { LoginComponent } from './login/login.component';
 import { TokenInterceptorInterceptor } from './services/token-interceptor.interceptor';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   text: "Loading...",
   textColor: "#FFFFFF",
   textPosition: "center-center",
-  bgsColor: "#7b1fa2",
-  fgsColor: "#7b1fa2",
+  bgsColor: "#B799FF",
+  fgsColor: "#B799FF",
   fgsType: SPINNER.squareJellyBox,
-  fgsSize: 100,
+  fgsSize: 40,
   hasProgressBar: false
 }
 
@@ -53,6 +56,9 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     FlexLayoutModule,
     SharedModule,
     HttpClientModule,
+    MatSelectModule,
+    MatInputModule,
+    MatFormFieldModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
   ],
   providers: [HttpClientModule,{provide:HTTP_INTERCEPTORS, useClass:TokenInterceptorInterceptor, multi:true}],

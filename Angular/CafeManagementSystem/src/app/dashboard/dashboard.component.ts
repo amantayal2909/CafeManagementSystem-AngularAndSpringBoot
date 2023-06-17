@@ -23,6 +23,9 @@ export class DashboardComponent implements AfterViewInit {
 	}
 
 	dashboardData() {
+		
+		console.log("getting the data for the dashboard");
+		
 		this.dashboardService.getDetails().subscribe((response:any) => {
 			this.ngxService.stop();
 			this.data = response;

@@ -84,35 +84,35 @@ export class ViewBillComponent implements OnInit {
   }
 
   deleteBill(id: any) {
-    this.billService.delete(id).subscribe((response: any) => {
-      this.ngxService.stop();
-      this.tableData();
-      this.responseMessage = response?.message;
-      this.snackbarService.openSnackBar(this.responseMessage, "success");
-    }, (error: any) => {
-      this.ngxService.stop();
-      console.log(error);
-      if(error.error?.message) {
-        this.responseMessage = error.error?.message;
-      } else {
-        this.responseMessage = GlobalConstants.genericError;
-      }
-      this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
-    })
+    // this.billService.delete(id).subscribe((response: any) => {
+    //   this.ngxService.stop();
+    //   this.tableData();
+    //   this.responseMessage = response?.message;
+    //   this.snackbarService.openSnackBar(this.responseMessage, "success");
+    // }, (error: any) => {
+    //   this.ngxService.stop();
+    //   console.log(error);
+    //   if(error.error?.message) {
+    //     this.responseMessage = error.error?.message;
+    //   } else {
+    //     this.responseMessage = GlobalConstants.genericError;
+    //   }
+    //   this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
+    // })
   }
 
   downloadReportAction(values: any) {
-    this.ngxService.start();
-    var data = {
-      name: values.name,
-      email: values.email,
-      uuid: values.uuid,
-      contactNumber: values.contactNumber,
-      paymentMethod: values.paymentMethod,
-      totalAmount: values.total.toString(),
-      productDetails: values.productDetail
-    }
-    this.downloadFile(values.uuid, data);
+    // this.ngxService.start();
+    // var data = {
+    //   name: values.name,
+    //   email: values.email,
+    //   uuid: values.uuid,
+    //   contactNumber: values.contactNumber,
+    //   paymentMethod: values.paymentMethod,
+    //   totalAmount: values.total.toString(),
+    //   productDetails: values.productDetail
+    // }
+    // this.downloadFile(values.uuid, data);
   }
 
   downloadFile(fileName: string, data: any) {

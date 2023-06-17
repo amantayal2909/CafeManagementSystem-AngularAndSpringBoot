@@ -36,6 +36,8 @@ export class LoginComponent implements OnInit {
   }
 
   handleSubmit() {
+
+    console.log("handle func");
     this.ngxService.start();
     var formData = this.loginForm.value;
     var data = {
@@ -44,15 +46,20 @@ export class LoginComponent implements OnInit {
     }
 
     this.userService.login(data).subscribe((response:any) => {
+
+      console.log("inside userService");
       console.log(data);
       this.ngxService.stop();
       this.dialogRef.close();
       console.log("----------Login-----------");
 
-      console.log(response.token,"---------------");
-      window.sessionStorage.removeItem('token');
+      console.log("token is "+response.token,"---------------");
+      // window.sessionStorage.removeItem('token');
       window.sessionStorage.setItem('token', JSON.stringify(response.token));
-      localStorage.setItem('token', response.token);
+      // window.localStorage.removeItem('token');
+      window.localStorage.setItem('token', response.token);
+      console.log("Data is stored in the session storage after logging in");
+      
       // this.responseMessage = response?.message;
       // this.snackbarService.openSnackBar(this.responseMessage, "");
       this.router.navigate(['/cafe/dashboard']);

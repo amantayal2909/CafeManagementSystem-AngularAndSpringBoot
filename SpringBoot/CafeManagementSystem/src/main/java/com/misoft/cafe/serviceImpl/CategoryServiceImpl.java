@@ -32,7 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
     public ResponseEntity<String> addNewCategory(Map<String, String> requestMap) {
         try {
             if(jwtFilter.isAdmin()) {
-                if(validateCategoryMap(requestMap, false)) {
+                if(validateCategoryMap(requestMap, false) ) {
                     categoryRepository.save(getCategoryFromMap(requestMap, false));
                     return CafeUtils.getResponseEntity("Category Added Successfully", HttpStatus.OK);
                 }

@@ -1,9 +1,56 @@
-.mat-toolbar{
-    margin: -24px;
-    margin-bottom: 10px;
-    width: auto;
-}
+// .mat-toolbar{
+//     margin: -24px;
+//     margin-bottom: 10px;
+//     width: auto;
+// }
 
-mat-form-field{
-    padding: 5px;
+// mat-form-field{
+//     padding: 5px;
+// }
+.u1{
+    //display: flex;
+    //justify-content: flex-end;
+    height:70px;
+    background-color: #ACBCFF;
 }
+.toolbar-row {
+    height: 48px;
+    padding: 0 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .logo1{
+    align-items: left;
+    margin-left: 23px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: auto;
+    margin-bottom:auto;
+  }
+//   .mat-dialog-close{
+//     align-items: flex-end;
+//   }
+  
+  .logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .mat-dialog-content {
+    padding: 24px;
+  }
+  
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 24px 24px;
+  }
+  
+  button[type="submit"] {
+    margin-right: 16px;
+  }
+  
+  button[type="submit"] .mat-icon {
+    margin-right: 8px;
+  }
+  

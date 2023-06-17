@@ -7,6 +7,7 @@ import com.misoft.cafe.entity.Product;
 import com.misoft.cafe.repository.ProductRepository;
 import com.misoft.cafe.service.ProductService;
 import com.misoft.cafe.utils.CafeUtils;
+import com.misoft.cafe.wrapper.ProductDetails;
 import com.misoft.cafe.wrapper.ProductWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     JwtFilter jwtFilter;
+
+    public ProductServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
 
     @Override
     public ResponseEntity<String> addNewProduct(Map<String, String> requestMap) {
@@ -153,21 +159,104 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ResponseEntity<List<ProductWrapper>> getByCategory(Integer id) {
         try {
-            return new ResponseEntity<>(productRepository.getProductByCategory(id), HttpStatus.OK);
+            List<ProductWrapper> products = productRepository.getProductByCategory(id);
+            populateProductDetails(products);
+
+            return new ResponseEntity<>(products, HttpStatus.OK);
         } catch (Exception ex) {
             ex.printStackTrace();
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @Override
+    private void populateProductDetails(List<ProductWrapper> products) {
+        for (ProductWrapper product : products) {
+            // Retrieve the missing details based on the product ID
+            ProductDetails details = productRepository.getProductDetailsById(product.getId());
+
+            // Set the missing fields in the ProductWrapper object
+            product.setDescription(details.getDescription());
+            product.setPrice(details.getPrice());
+            product.setStatus(details.getStatus());
+            product.setCategoryId(details.getCategoryId());
+            product.setCategoryName(details.getCategoryName());
+        }
+    }
+
+//    @Override
+//    public ResponseEntity<List<ProductWrapper>> getByCategory(Integer id) {
+//        try {
+//            return new ResponseEntity<>(productRepository.getProductByCategory(id), HttpStatus.OK);
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
+
+
+//@Override
+//public ResponseEntity<List<ProductWrapper>> getByCategory(Integer id) {
+//    try {
+//        List<ProductWrapper> products = productRepository.getProductByCategory(id);
+//        populateProductDetails(products);
+//
+//        return new ResponseEntity<>(products, HttpStatus.OK);
+//    } catch (Exception ex) {
+//        ex.printStackTrace();
+//        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
+//}
+//
+//    private void populateProductDetails(List<ProductWrapper> products) {
+//        for (ProductWrapper product : products) {
+//            // Retrieve the missing details based on the product ID
+//            ProductWrapper details = productRepository.getProductDetailsById(product.getId());
+//
+//            // Set the missing fields in the ProductWrapper object
+//            product.setDescription(details.getDescription());
+//            product.setPrice(details.getPrice());
+//            product.setStatus(details.getStatus());
+//            product.setCategoryId(details.getCategoryId());
+//            product.setCategoryName(details.getCategoryName());
+//        }
+//    }
+
+
+//    @Override
+//    public ResponseEntity<ProductWrapper> getProductById(Integer id) {
+//        try {
+//            return new ResponseEntity<>(productRepository.getProductById(id), HttpStatus.OK);
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//        return new ResponseEntity<>(new ProductWrapper(), HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
+
     public ResponseEntity<ProductWrapper> getProductById(Integer id) {
         try {
-            return new ResponseEntity<>(productRepository.getProductById(id), HttpStatus.OK);
+            ProductWrapper product = productRepository.getProductById(id);
+            if (product != null) {
+                populateProductDetails(product);
+                return new ResponseEntity<>(product, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(new ProductWrapper(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    private void populateProductDetails(ProductWrapper product) {
+        // Retrieve the missing details based on the product ID
+        ProductDetails details = productRepository.getProductDetailsById(product.getId());
+
+        // Set the missing fields in the ProductWrapper object
+        product.setDescription(details.getDescription());
+        product.setPrice(details.getPrice());
+        product.setStatus(details.getStatus());
+        product.setCategoryId(details.getCategoryId());
+        product.setCategoryName(details.getCategoryName());
     }
 
 }

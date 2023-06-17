@@ -30,6 +30,10 @@ public class ProductWrapper {
     public ProductWrapper(Integer id, String name) {
         this.id = id;
         this.name = name;
+//        this.categoryId=getCategoryId();
+//        this.description=getDescription();
+//        this.price=getPrice();
+
     }
 
     public ProductWrapper(Integer id, String name, String description, Integer price) {

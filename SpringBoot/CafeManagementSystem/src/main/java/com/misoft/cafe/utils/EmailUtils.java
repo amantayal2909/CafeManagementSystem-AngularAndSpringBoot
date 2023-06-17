@@ -37,7 +37,7 @@ public class EmailUtils {
     public void forgotMail(String to, String subject, String password) throws MessagingException {
         MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
-        helper.setFrom("mirakib33@gmail.com");
+        helper.setFrom("");
         helper.setSubject(subject);
         String htmlMsg = "<p><b>Your Login details for Cafe Management System</b><br><b>Email: </b> " + to + " <br><b>Password: </b> " + password + "<br><a href=\"http://localhost:4200/\">Click here to Login</a></p>";
         message.setContent(htmlMsg, "text/html");

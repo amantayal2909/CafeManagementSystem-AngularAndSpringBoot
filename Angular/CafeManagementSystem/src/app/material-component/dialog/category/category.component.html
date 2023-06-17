@@ -1,12 +1,12 @@
-<mat-toolbar color="primary">
+<mat-toolbar style=" background-color: #B799FF ; width: 102.5%;">
     <mat-toolbar-row fxLayout="row">
-        <span>{{ dialogData.action }} Category</span>
+        <span style="margin-left: 4%; background-color: #B799FF ;color:black;">{{ dialogData.action }} Category</span>
         <span class="spacer"></span>
-        <button class="mat-dialog-close" mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
+        <button class="mat-dialog-close" style="margin-right: 3%;"mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
     </mat-toolbar-row>
 </mat-toolbar>
 
-<mat-dialog-content class="mat-typography">
+<mat-dialog-content class="mat-typography" style=" height: 50%;">
     <form [formGroup]="categoryForm">
         <div fxFlex fxLayout="column">
             <div fxLayout="row wrap">
@@ -22,7 +22,7 @@
     </form>
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
+<mat-dialog-actions align="end" style="margin: top 0; ">
     <button mat-raised-button color="primary" type="submit" (click)="handleSubmit()"
         [disabled]="!(categoryForm.valid && categoryForm.dirty)">
         <mat-icon>save</mat-icon> {{ action }}
