@@ -57,7 +57,9 @@ public class BillServiceImpl implements BillService {
                         "\n" + "Payment Method: " + requestMap.get("paymentMethod");
 
                 Document document = new Document();
-                PdfWriter.getInstance(document, new FileOutputStream(CafeConstants.STORE_LOCATION + "\\" + fileName + ".pdf"));
+                //PdfWriter.getInstance(document, new FileOutputStream(CafeConstants.STORE_LOCATION + "\\" + fileName + ".pdf"));
+                String filePath = "E:\\bills" + fileName + ".pdf";
+                PdfWriter.getInstance(document, new FileOutputStream(filePath));
 
                 document.open();
                 setRectangleInPdf(document);
@@ -190,7 +192,9 @@ public class BillServiceImpl implements BillService {
             byte[] byteArray = new byte[0];
             if(!requestMap.containsKey("uuid") && validateRequestMap(requestMap))
                 return new ResponseEntity<>(byteArray, HttpStatus.BAD_REQUEST);
-            String filePath = CafeConstants.STORE_LOCATION + "\\" + (String) requestMap.get("uuid") + ".pdf";
+           // String filePath = CafeConstants.STORE_LOCATION + "\\" + (String) requestMap.get("uuid") + ".pdf";
+            String filePath = "E:\\bills" + (String) requestMap.get("uuid") + ".pdf";
+            //PdfWriter.getInstance(document, new FileOutputStream(filePath));
             if(CafeUtils.isFileExist(filePath)) {
                 byteArray = getByteArray(filePath);
                 return new ResponseEntity<>(byteArray, HttpStatus.OK);
