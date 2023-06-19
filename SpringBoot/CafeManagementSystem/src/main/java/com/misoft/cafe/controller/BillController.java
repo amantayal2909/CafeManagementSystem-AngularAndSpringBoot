@@ -1,6 +1,7 @@
 package com.misoft.cafe.controller;
 
 import com.misoft.cafe.entity.Bill;
+import com.misoft.cafe.entity.TransactionalDetails;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,5 +22,13 @@ public interface BillController {
 
     @PostMapping(path = "/delete/{id}")
     ResponseEntity<String> deleteBill(@PathVariable Integer id);
+
+//    @GetMapping({"/createTransaction/{amount}"})
+//    public TransactionDetails createTransaction(@PathVariable(name = "amount") Double amount) {
+//        return BillService.createTransaction(amount);
+//    }
+    @GetMapping({"/createTransaction/{amount}"})
+    TransactionalDetails createTransaction(@PathVariable(name = "amount") Double amount) ;
+        //return BillService.createTransaction(amount);
 
 }

@@ -8,7 +8,9 @@ import { ProductService } from 'src/app/services/product.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { GlobalConstants } from 'src/app/shared/global-constants';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+//import * as Razorpay from 'razorpay';
+//import * as Razorpay from 'razorpay';
+declare var Razorpay: any;
 @Component({
   selector: 'app-manage-order',
   templateUrl: './manage-order.component.html',
@@ -35,6 +37,8 @@ export class ManageOrderComponent implements OnInit {
   totalAmount: number = 0;
 
   responseMessage: any;
+  
+  flags: boolean=false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -248,6 +252,7 @@ export class ManageOrderComponent implements OnInit {
   }
 
   submitAction() {
+    if(this.flags==true){
     var formData = this.manageOrderForm.value;
     var data = {
       name: formData.name,
@@ -263,6 +268,7 @@ export class ManageOrderComponent implements OnInit {
       this.manageOrderForm.reset();
       this.dataSource = [];
       this.totalAmount = 0;
+      this.flags=false;
     }, (error: any) => {
       console.log(error);
       if (error.error?.message) {
@@ -272,7 +278,10 @@ export class ManageOrderComponent implements OnInit {
       }
       this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
     })
+
+    //this.flags=false;
   }
+}
 
   downloadFile(fileName: string) {
     var data = {
@@ -283,6 +292,68 @@ export class ManageOrderComponent implements OnInit {
       saveAs(response, fileName + '.pdf');
       this.ngxService.stop();
     })
+  }
+
+  createTransaction() {
+   // let amount = this.getCalculatedGrandTotal();
+   if(this.flags==false){
+
+    this.billService.createTransaction(this.totalAmount).subscribe(
+      (response) => {
+        console.log(response);
+        this.openTransactioModal(response);
+        //this.flags=true;
+      
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    //this.flags=true;
+   }
+
+  }
+
+  openTransactioModal(response: any) {
+    var options = {
+      order_id: response.orderId,
+      key: response.key,
+      amount: response.amount,
+      currency: response.currency,
+      //name: 'Learn programming yourself',
+      //description: 'Payment of online shopping',
+      //image: 'https://cdn.pixabay.com/photo/2023/01/22/13/46/swans-7736415_640.jpg',
+      handler: (response: any) => {
+        if(response!= null && response.razorpay_payment_id != null) {
+          this.processResponse(response);
+          this.flags=true;
+        } else {
+          alert("Payment failed..")
+        }
+       
+      },
+      prefill : {
+        name:'LPY',
+        email: 'LPY@GMAIL.COM',
+        contact: '90909090'
+      },
+      notes: {
+        address: 'Online Shopping'
+      },
+      theme: {
+        color: '#F37254'
+      }
+    };
+
+    var razorPayObject = new Razorpay(options);
+    razorPayObject.open();
+    console.log(this.flags)
+
+  }
+
+  processResponse(resp: any) {
+    //this.orderDetails.transactionId = resp.razorpay_payment_id;
+    //this.placeOrder(orderForm);
   }
 
 }

@@ -7,12 +7,16 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.misoft.cafe.JWT.JwtFilter;
 import com.misoft.cafe.constants.CafeConstants;
 import com.misoft.cafe.entity.Bill;
+import com.misoft.cafe.entity.TransactionalDetails;
 import com.misoft.cafe.repository.BillRepository;
 import com.misoft.cafe.service.BillService;
 import com.misoft.cafe.utils.CafeUtils;
+import com.razorpay.Order;
+import com.razorpay.RazorpayClient;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.io.IOUtils;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -77,7 +81,7 @@ public class BillServiceImpl implements BillService {
 
                 JSONArray jsonArray = CafeUtils.getJsonArrayFromString((String) requestMap.get("productDetails"));
                 for (int i = 0; i < jsonArray.length(); i++) {
-                    addRows(table, CafeUtils.getMapFromJson(jsonArray.getString(i)));
+                    addRows(table, CafeUtils.getMapFromJson(String.valueOf(jsonArray.getJSONObject(i))));
                 }
                 document.add(table);
 
@@ -232,6 +236,45 @@ public class BillServiceImpl implements BillService {
             ex.printStackTrace();
         }
         return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    // private static final String ORDER_PLACED = "Placed";
+
+    private static final String KEY = "rzp_test_1JkNESfyQfp2l2";
+    private static final String KEY_SECRET = "fOv7DMndSlfK0MvU5UX069IR";
+    private static final String CURRENCY = "INR";
+
+    public TransactionalDetails createTransaction(Double amount) {
+        try {
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("amount", (amount * 100) );
+            jsonObject.put("currency", CURRENCY);
+
+            RazorpayClient razorpayClient = new RazorpayClient(KEY, KEY_SECRET);
+
+            Order order = razorpayClient.orders.create(jsonObject);
+            System.out.println(order);
+            System.out.println("11");
+
+
+            TransactionalDetails transactionDetails =  prepareTransactionDetails(order);
+            System.out.println(transactionDetails);
+            return transactionDetails;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    private TransactionalDetails prepareTransactionDetails(Order order) {
+        String orderId = order.get("id");
+        String currency = order.get("currency");
+        Integer amount = order.get("amount");
+
+        TransactionalDetails transactionDetails = new TransactionalDetails(orderId, currency, amount, KEY);
+        System.out.println(transactionDetails);
+        return transactionDetails;
     }
 
 }
