@@ -320,8 +320,8 @@ export class ManageOrderComponent implements OnInit {
       key: response.key,
       amount: response.amount,
       currency: response.currency,
-      //name: 'Learn programming yourself',
-      //description: 'Payment of online shopping',
+      name: 'VMANAGE',
+      description: 'Payment of cafe orders',
       //image: 'https://cdn.pixabay.com/photo/2023/01/22/13/46/swans-7736415_640.jpg',
       handler: (response: any) => {
         if(response!= null && response.razorpay_payment_id != null) {
@@ -333,12 +333,12 @@ export class ManageOrderComponent implements OnInit {
        
       },
       prefill : {
-        name:'LPY',
-        email: 'LPY@GMAIL.COM',
-        contact: '90909090'
+        name:this.manageOrderForm.value.name,
+        email: this.manageOrderForm.value.email,
+        contact: this.manageOrderForm.value.contactNumber
       },
       notes: {
-        address: 'Online Shopping'
+        address: 'Food Payment'
       },
       theme: {
         color: '#F37254'

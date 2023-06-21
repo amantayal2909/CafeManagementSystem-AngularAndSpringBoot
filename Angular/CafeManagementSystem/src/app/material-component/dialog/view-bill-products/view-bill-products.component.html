@@ -1,4 +1,4 @@
-<mat-toolbar style="background-color: #B799FF ;">
+<!-- <mat-toolbar style="background-color: #B799FF ;">
     <mat-toolbar-row fxLayout="row">
         <span style=" margin-left:2%; background-color: #B799FF ;color:black;">View Bill</span>
 
@@ -7,55 +7,10 @@
             <mat-icon>close</mat-icon>
         </button>
     </mat-toolbar-row>
-</mat-toolbar>
+</mat-toolbar> -->
 
-<!-- <mat-dialog-content class="mat-typography">
-    <table id="customesr">
-        <tr>
-            <td><b>Name:</b> {{ data?.name }}</td>
-            <td><b>Email:</b> {{ data?.email }}</td>
-        </tr>
 
-        <tr>
-            <td><b>Contact Number:</b> {{ data?.contactNumber }}</td>
-            <td><b>Payment Method:</b> {{ data?.paymentMethod }}</td>
-        </tr>
-    </table>
-
-    <div class="responsive_table">
-        <br>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef>Name</th>
-                <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="category">
-                <th mat-header-cell *matHeaderCellDef>Category</th>
-                <td mat-cell *matCellDef="let element">{{ element.category }}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="price">
-                <th mat-header-cell *matHeaderCellDef>Category</th>
-                <td mat-cell *matCellDef="let element">{{ element.category }}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="quantity">
-                <th mat-header-cell *matHeaderCellDef>Quantity</th>
-                <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="total">
-                <th mat-header-cell *matHeaderCellDef>Total</th>
-                <td mat-cell *matCellDef="let element">{{ element.total }}</td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
-            <tr mat-row *matRowDef="let row; columns:displayedColumns;"></tr>
-        </table>
-    </div>
-</mat-dialog-content> -->
-<table id="customesr">
+<!-- <table id="customesr">
     <tr>
         <td><b>Name:</b> {{ data?.name }}</td>
         <td><b>Email:</b> {{ data?.email }}</td>
@@ -63,42 +18,13 @@
 
     <tr>
         <td><b>Contact Number:</b> {{ data?.contactNumber }}</td>
-        <td><b>Payment Method:</b> {{ data?.paymentMethod }}</td>
+        <td><b>Payment Method:</b> Online Payment</td>
     </tr>
-</table>
-<p>as</p>
-<br>
-<!-- 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef>Category</th>
-        <td mat-cell *matCellDef="let element">{{ element.category }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef>Price</th>
-        <td mat-cell *matCellDef="let element">{{ element.price }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="quantity">
-        <th mat-header-cell *matHeaderCellDef>Quantity</th>
-        <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="total">
-        <th mat-header-cell *matHeaderCellDef>Total</th>
-        <td mat-cell *matCellDef="let element">{{ element.total }}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table> -->
-<table class="custom-table">
+
+<!-- <br> -->
+
+<!-- <table class="custom-table">
     <thead>
       <tr>
         <th>Name</th>
@@ -108,9 +34,65 @@
         <th>Total</th>
       </tr>
     </thead>
-    <!-- {{dataSource}} -->
+    
     <tbody>
       <tr *ngFor="let element of dataSource">
+        <td>{{ element.name }}</td>
+        <td>{{ element.category }}</td>
+        <td>{{ element.price }}</td>
+        <td>{{ element.quantity }}</td>
+        <td>{{ element.total }}</td>
+      </tr>
+    </tbody>
+  </table> -->
+  
+  <mat-toolbar style="background-color: #B799FF;">
+    <mat-toolbar-row fxLayout="row">
+      <span style="margin-left: 1%; color: black;">View Bill</span>
+      <span class="spacer"></span>
+      <button class="mat-dialog-close" mat-icon-button mat-dialog-close>
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+  <!-- <table id="customesr">
+    <tr >
+      <td style="padding-right: 20px;"><b>Name:</b> {{ data?.name }}</td>
+      <td><b>Email:</b> {{ data?.email }}</td>
+    </tr>
+    <tr>
+      <td><b>Contact Number:</b> {{ data?.contactNumber }}</td>
+      <td><b>Payment Method:</b> Online Payment</td>
+    </tr>
+  </table> -->
+
+  <table id="customesr">
+    <tr >
+      <td style="padding-left:3%; "><b>Name:</b> {{ data?.name }}</td>
+      <td><b>Email:</b> {{ data?.email }}</td>
+    </tr>
+    
+    <tr>
+      <td style="padding-left:3%;"><b>Contact Number:</b> {{ data?.contactNumber }}</td>
+      <td><b>Payment Method:</b> Online Payment</td>
+    </tr>
+  </table> 
+  
+  <br>
+  
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let element of dataSource; let i = index" [ngClass]="i % 2 === 0 ? 'even-row' : 'odd-row'">
         <td>{{ element.name }}</td>
         <td>{{ element.category }}</td>
         <td>{{ element.price }}</td>

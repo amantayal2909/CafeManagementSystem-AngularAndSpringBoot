@@ -1,42 +1,71 @@
-.mat-toolbar {
-    margin: -24px;
-    margin-bottom: 0;
-    width: auto;
-    margin-bottom: 10PX;
-  }
+// .mat-toolbar {
+//     margin: -24px;
+//     margin-bottom: 0;
+//     width: auto;
+//     margin-bottom: 10PX;
+//   }
   
-    mat-form-field{
-        padding: 5px;
-    }
+//     mat-form-field{
+//         padding: 5px;
+//     }
 
-    .float-right{
-        float: right;
-    }
+//     .float-right{
+//         float: right;
+//     }
     
-    mat-card{
-        padding: 20px;
-    }
+//     mat-card{
+//         padding: 20px;
+//     }
     
-    table {
-        width: 100%;
-      }
+//     table {
+//         width: 100%;
+//       }
 
 
-      #customers {
-        font-family: Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-      }
+//       #customers {
+//         font-family: Arial, Helvetica, sans-serif;
+//         border-collapse: collapse;
+//         width: 100%;
+//       }
       
-      #customers td, #customers th {
-        border: 1px solid #ddd;
-        padding: 8px;
-      }
+//       #customers td, #customers th {
+//         border: 1px solid #ddd;
+//         padding: 8px;
+//       }
       
-      #customers th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #04AA6D;
-        color: white;
-      }
+//       #customers th {
+//         padding-top: 12px;
+//         padding-bottom: 12px;
+//         text-align: left;
+//         background-color: #04AA6D;
+//         color: white;
+//       }
+
+mat-toolbar {
+  background-color: #B799FF;
+  color: black;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.custom-table th {
+  background-color: #B799FF;
+  color: black;
+}
+
+.custom-table .odd-row {
+  background-color: #E6FFFD;
+}
+
+//.custom-table .even-row {
+  //background-color: #D9FDFB;
+//}

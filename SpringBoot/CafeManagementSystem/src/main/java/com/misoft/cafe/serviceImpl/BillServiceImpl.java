@@ -58,7 +58,7 @@ public class BillServiceImpl implements BillService {
                 String data = "Name: " + requestMap.get("name") +
                         "\n" + "Contact Number: " + requestMap.get("contactNumber") +
                         "\n" + "Email: " + requestMap.get("email") +
-                        "\n" + "Payment Method: " + requestMap.get("paymentMethod");
+                        "\n" + "Payment Method: Online Payment" ;
 
                 Document document = new Document();
                 //PdfWriter.getInstance(document, new FileOutputStream(CafeConstants.STORE_LOCATION + "\\" + fileName + ".pdf"));
@@ -240,8 +240,8 @@ public class BillServiceImpl implements BillService {
 
     // private static final String ORDER_PLACED = "Placed";
 
-    private static final String KEY = "rzp_test_1JkNESfyQfp2l2";
-    private static final String KEY_SECRET = "fOv7DMndSlfK0MvU5UX069IR";
+    private static final String KEY = "rzp_test_aFn2GZibJW9zBr";
+    private static final String KEY_SECRET = "zanTQc49fNWO2rrfQtFbSi0q";
     private static final String CURRENCY = "INR";
 
     public TransactionalDetails createTransaction(Double amount) {

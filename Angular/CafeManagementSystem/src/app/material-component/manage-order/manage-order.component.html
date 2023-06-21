@@ -52,9 +52,9 @@
       <div class="form-group">
         <label for="paymentMethod">Payment Method</label>
         <select id="paymentMethod" formControlName="paymentMethod" required>
-          <option value="Cash">Cash</option>
-          <option value="Credit Card">Credit Card</option>
-          <option value="Debit Card">Debit Card</option>
+          <option value="Cash">Online Payment</option>
+          <!-- <option value="Credit Card">Credit Card</option> -->
+          <!-- <option value="Debit Card">Debit Card</option> -->
         </select>
         <div class="error-message" *ngIf="manageOrderForm.controls.paymentMethod.touched && manageOrderForm.controls.paymentMethod.invalid">
           <span *ngIf="manageOrderForm.controls.paymentMethod.errors.required">This field is mandatory</span>
@@ -138,14 +138,14 @@
     </form>
   
     <div class="buttons-container">
-      <button class="btn-primary" [disabled]="validateProductAdd()" (click)="add()">Add</button>
-      <button class="btn-primary float-right">
+      <button style="background-color: #B799FF; color:black ;font-size: 20px; width: 100px; margin-left: 40px; border-color: #B799FF;"class="btn-primary" [disabled]="validateProductAdd()" (click)="add()">Add</button>
+      <button class="btn-primary float-right" style="background-color: #B799FF; color:black ; font-size: 14px; border-color: #B799FF;width: 100px;margin-right: 500px;margin-bottom: 15px;">
         <i class="icon-monetization_on"></i> Total Amount: {{ totalAmount }}
       </button>
     </div>
   </div>
   
-
+<br>
 <hr>
 
 <!-- <div class="responsive_table">
@@ -190,6 +190,35 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 </div> -->
+
+
+<!-- <div class="responsive_table">
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr *ngFor="let element of dataSource; let i = index" [ngClass]="i % 2 === 0 ? 'even-row' : 'odd-row'">
+        <td>{{ element.name }}</td>
+        <td>{{ element.category }}</td>
+        <td>{{ element.price }}</td>
+        <td>{{ element.quantity }}</td>
+        <td>{{ element.total }}</td>
+        <td>
+          <button (click)="handleDeleteAction(i, element)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->
 <div class="responsive_table">
   <table class="custom-table">
     <thead>
@@ -203,13 +232,18 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let element of dataSource">
+      <tr *ngFor="let element of dataSource; let i = index" [ngClass]="i % 2 === 0 ? 'even-row' : 'odd-row'">
         <td>{{ element.name }}</td>
         <td>{{ element.category }}</td>
         <td>{{ element.price }}</td>
         <td>{{ element.quantity }}</td>
         <td>{{ element.total }}</td>
-      
+        <td>
+          <!-- <button (click)="handleDeleteAction(i, element)"> <mat-icon color="primary">delete</mat-icon></button> -->
+          <button mat-icon-button color="primary" matTooltip="Delete" (click)="handleDeleteAction(i,element)">
+            <mat-icon>delete</mat-icon>
+        </button>
+        </td>
       </tr>
     </tbody>
   </table>

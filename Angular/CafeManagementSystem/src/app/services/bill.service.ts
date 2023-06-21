@@ -31,5 +31,8 @@ export class BillService {
       headers: new HttpHeaders().set('Content-Type', "application/json")
     })
   }
+  public createTransaction(amount:any) {
+    return this.httpClient.get("http://localhost:8080/bill/createTransaction/"+amount);
+  }
 
 }
